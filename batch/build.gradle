@@ -1,0 +1,10 @@
+version = '0.0.1'
+
+dependencies {
+	compile('org.springframework:spring-context-support')
+	compile('org.quartz-scheduler:quartz:2.2.3')	
+	compile('org.codehaus.janino:janino:3.0.7')	
+	compile('org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16')	
+	compile('com.h2database:h2')
+	compile fileTree(dir: '/webapp/WEB-INF/lib', include: ['*.jar'])
+}
