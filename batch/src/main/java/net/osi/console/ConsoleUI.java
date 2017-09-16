@@ -1,7 +1,8 @@
-package net.osi;
+package net.osi.console;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
@@ -14,11 +15,12 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import net.osi.view.DashboardView;
-import net.osi.view.StatusView;
+import net.osi.console.view.DashboardView;
+import net.osi.console.view.StatusView;
 
 @SpringUI(path = "/quartz/console")
 @Title("Quartz Console")
+@Theme("valo")
 public class ConsoleUI extends UI {	
 	
 	private static final long serialVersionUID = 1L;
@@ -91,7 +93,7 @@ public class ConsoleUI extends UI {
     	//button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
     	
     	button.addClickListener(event -> {    		
-    		navigator.navigateTo(DashboardView.VIEW_NAME);
+    		navigator.navigateTo(StatusView.VIEW_NAME);
     	});
     	
     	return button;

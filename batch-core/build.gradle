@@ -1,0 +1,22 @@
+bootRepackage {
+	enabled = false
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')    	
+	compile('org.springframework:spring-context-support')	
+	compile('org.projectlombok:lombok')
+	compile('net.sourceforge.pmd:pmd:5.8.1')
+	compile('org.codehaus.janino:janino:3.0.7')
+	compile('org.quartz-scheduler:quartz:2.2.3')		
+		
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
+	compile('org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16')
+	compile('com.h2database:h2')	
+		
+	compile fileTree(dir: '/libs', include: ['*.jar'])
+	
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')	
+}
