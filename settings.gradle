@@ -16,6 +16,6 @@ include 'services:webservice'
 */
 
 include 'batch'
-include 'console'
+include 'batch-core'
 
 rootProject.name = 'easyquartz'
