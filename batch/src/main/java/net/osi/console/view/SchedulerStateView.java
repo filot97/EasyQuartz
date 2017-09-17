@@ -20,7 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = SchedulerStateView.VIEW_NAME)
 public class SchedulerStateView extends VerticalLayout implements View {
 
-	public static final String VIEW_NAME = "status";
+	public static final String VIEW_NAME = "schedulerState";
 	
 	@Autowired
 	private Scheduler scheduler;
