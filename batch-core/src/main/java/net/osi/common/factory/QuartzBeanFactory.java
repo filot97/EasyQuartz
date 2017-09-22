@@ -18,9 +18,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import net.osi.job.common.JobBean;
-import net.osi.job.common.JobTrigger;
-
 @Configuration
 public class QuartzBeanFactory {
 
