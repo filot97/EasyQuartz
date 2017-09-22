@@ -1,0 +1,14 @@
+version = '0.0.1'
+
+bootRepackage {
+	enabled = true
+}
+
+dependencies {
+	compile project(':batch-core')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

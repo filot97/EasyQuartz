@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"
+	version="2.0">
+
+	<schedule>
+		<job>
+			<name>sayHelloJavaService</name>
+			<group>MYJOB_GROUP</group>
+
+			<description>sayHelloJavaService</description>
+			<job-class>net.osi.job.JavaJob</job-class>
+			<durability>true</durability>
+			<recover>true</recover>
+			<job-data-map>
+				<entry>
+					<key>targetObject</key>
+					<value>net.osi.service.impl.HelloService</value>
+				</entry>
+				<entry>
+					<key>say</key>
+					<value>hello</value>
+				</entry>
+			</job-data-map>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>sayHellotrigger</name>
+				<group>MYTRIGGER_GROUP</group>
+				<job-name>sayHelloJavaService</job-name>
+				<job-group>MYJOB_GROUP</job-group>
+				<cron-expression>0/5 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+	
+	<schedule>
+		<job>
+			<name>anyframeQueryService</name>
+			<group>MYJOB_GROUP</group>
+
+			<description>anyframeQueryService</description>
+			<job-class>net.osi.job.QueryJob</job-class>
+			<durability>true</durability>
+			<recover>true</recover>
+			<job-data-map>
+				<entry>
+					<key>sqlId</key>
+					<value>sample.insert</value>
+				</entry>
+				<entry>
+					<key>param1</key>
+					<value>foo</value>
+				</entry>					
+			</job-data-map>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>anyframeQueryServiceTrigger</name>
+				<group>MYTRIGGER_GROUP</group>
+				<job-name>anyframeQueryService</job-name>
+				<job-group>MYJOB_GROUP</job-group>
+				<cron-expression>0/5 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+	
+	<schedule>
+		<job>
+			<name>myBatisService</name>
+			<group>MYJOB_GROUP</group>
+
+			<description>myBatisService</description>
+			<job-class>net.osi.job.MyBatisJob</job-class>
+			<durability>true</durability>
+			<recover>true</recover>
+			<job-data-map>
+				<entry>
+					<key>sqlId</key>
+					<value>sampleInsert</value>
+				</entry>
+				<entry>
+					<key>sqlType</key>
+					<value>INSERT</value>
+				</entry>
+				<entry>
+					<key>param1</key>
+					<value>bar</value>
+				</entry>					
+			</job-data-map>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>myBatisServiceTrigger</name>
+				<group>MYTRIGGER_GROUP</group>
+				<job-name>myBatisService</job-name>
+				<job-group>MYJOB_GROUP</job-group>
+				<cron-expression>0/5 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<trigger>
+			<cron>
+				<name>myBatisServiceTrigger2</name>
+				<group>MYTRIGGER_GROUP</group>
+				<job-name>myBatisService</job-name>
+				<job-group>MYJOB_GROUP</job-group>
+				<cron-expression>0/10 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>

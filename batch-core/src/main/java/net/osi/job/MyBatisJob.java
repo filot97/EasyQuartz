@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.PersistJobDataAfterExecution;
@@ -29,30 +30,27 @@ public class MyBatisJob implements Job {
 	private SqlSessionFactory sqlSessionFactory;
 
 	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		@SuppressWarnings("unchecked")
-		final Map<String, String> jobDataAsMap = (Map<String, String>) context.getJobDetail()
-															 				  .getJobDataMap()
-															 				  .get(Constants.PPROPERTY);
+	public void execute(JobExecutionContext context) throws JobExecutionException {		
+		final JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
 
 		if (LOG.isDebugEnabled())
-			LOG.debug(jobDataAsMap.toString());
+			LOG.debug(jobDataMap.toString());
 		
-		final String sqlId = jobDataAsMap.get("sqlId");
-		final String sqlType = jobDataAsMap.get("sqlType");
+		final String sqlId = jobDataMap.getString("sqlId");
+		final String sqlType = jobDataMap.getString("sqlType");
 
 		try (SqlSession session = this.sqlSessionFactory.openSession()) {		
 			switch (sqlType) {
 			case Constants.MYBATIS.SQL_TYPE_INSERT:			
-				session.insert(sqlId, jobDataAsMap);				
+				session.insert(sqlId, jobDataMap.getWrappedMap());				
 				break;
 	
 			case Constants.MYBATIS.SQL_TYPE_UPDATE:
-				session.update(sqlId, jobDataAsMap);				
+				session.update(sqlId, jobDataMap.getWrappedMap());				
 				break;		
 			
 			case Constants.MYBATIS.SQL_TYPE_DELETE:
-				session.delete(sqlId, jobDataAsMap);				
+				session.delete(sqlId, jobDataMap.getWrappedMap());				
 				break;
 			}
 			

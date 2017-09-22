@@ -32,13 +32,7 @@ public class QuartzBeanFactory {
 
 	@Autowired
 	@Qualifier("properties")
-	private Properties quartzProperties;
-
-	@Autowired
-	private JobTriggerFactory jobTriggerFactory;
-
-	@Resource(name = "jobs")
-	private List<JobBean> jobs;
+	private Properties quartzProperties;	
 
 	@Bean
 	public JobFactory jobFactory(ApplicationContext applicationContext) {
@@ -60,7 +54,7 @@ public class QuartzBeanFactory {
 		factoryBean.setWaitForJobsToCompleteOnShutdown(true);
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setTransactionManager(transactionManager);
-		factoryBean.setSchedulerName(quartzProperties.getProperty("org.quartz.scheduler.schedulerName"));
+		factoryBean.setSchedulerName(quartzProperties.getProperty("org.quartz.scheduler.schedulerName"));		
 
 		return factoryBean;
 	}
@@ -71,11 +65,6 @@ public class QuartzBeanFactory {
 		Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
 		scheduler.clear();
-
-		List<JobTrigger> jobTriggers = this.jobTriggerFactory.createJobTrigger(jobs);
-
-		for (JobTrigger jobTrigger : jobTriggers)
-			scheduler.scheduleJob(jobTrigger.getJobDetail(), jobTrigger.getTrigger());
 
 		return scheduler;
 	}

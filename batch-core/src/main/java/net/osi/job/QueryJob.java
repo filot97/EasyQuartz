@@ -7,6 +7,7 @@ import java.util.Map;
 import org.anyframe.query.QueryService;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.PersistJobDataAfterExecution;
@@ -31,20 +32,17 @@ public class QueryJob implements Job {
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		@SuppressWarnings("unchecked")
-		final Map<String, String> jobDataAsMap = (Map<String, String>) context.getJobDetail()
-														      				  .getJobDataMap()
-														      				  .get(Constants.PPROPERTY);
+		final JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
 		
 		if (LOG.isDebugEnabled())
-			LOG.debug(jobDataAsMap.toString());
+			LOG.debug(jobDataMap.toString());
 		
-		final String sqlId = jobDataAsMap.get("sqlId");
+		final String sqlId = jobDataMap.getString("sqlId");
 		
-		this.queryService.update(sqlId, this.buildArgs(jobDataAsMap).toArray());
+		this.queryService.update(sqlId, this.buildArgs(jobDataMap.getWrappedMap()).toArray());
 	}
 	
-	private List<String> buildArgs(final Map<String, String> jobDataAsMap) {
+	private List<String> buildArgs(final Map<String, Object> jobDataAsMap) {
 		final List<String> args = new ArrayList<String>();
 		
 		if (jobDataAsMap == null)

@@ -1,8 +1,8 @@
 package net.osi.service;
 
-import java.util.Map;
+import org.quartz.JobDataMap;
 
 public interface ServiceExecution {
 	
-	public void execute(Map<?, ?> jobDataAsMap);
+	public void execute(JobDataMap jobDataAsMap);
 }
