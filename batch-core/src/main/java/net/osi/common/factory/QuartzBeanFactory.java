@@ -1,10 +1,8 @@
 package net.osi.common.factory;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Properties;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.quartz.Scheduler;
@@ -41,7 +39,7 @@ public class QuartzBeanFactory {
 	}
 
 	@Bean
-	public SchedulerFactoryBean schedulerFactoryBean(JobFactory jobFactory) throws Exception {
+	public SchedulerFactoryBean schedulerFactory(JobFactory jobFactory) throws Exception {
 		SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
 
 		factoryBean.setJobFactory(jobFactory);

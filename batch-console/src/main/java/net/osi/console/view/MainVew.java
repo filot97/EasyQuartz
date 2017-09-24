@@ -3,6 +3,7 @@ package net.osi.console.view;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jmx.access.MBeanProxyFactoryBean;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.spring.annotation.SpringComponent;
@@ -21,6 +22,9 @@ public class MainVew extends MainViewDesign {
 
 	@Autowired
 	private SpringViewProvider viewProvider;
+	
+	@Autowired
+	private MBeanProxyFactoryBean quartzProxy;
 
 	@PostConstruct
 	protected void init() {				
