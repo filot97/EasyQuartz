@@ -1,4 +1,4 @@
-package net.osi.jmx;
+package net.osi.console.common.jmx;
 
 import java.net.MalformedURLException;
 

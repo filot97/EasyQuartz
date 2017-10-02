@@ -9,7 +9,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 
-import net.osi.console.view.MainVew;
+import net.osi.console.view.MainView;
 
 @SuppressWarnings("serial")
 @SpringUI(path = "/console")
@@ -22,7 +22,7 @@ public class ConsoleUI extends UI {
 	
     @Override
     protected void init(VaadinRequest request) {    	
-    	setContent(applicationContext.getBean(MainVew.class));
+    	setContent(applicationContext.getBean(MainView.class));
     }
     
 }

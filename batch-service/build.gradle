@@ -7,6 +7,7 @@ bootRepackage {
 dependencies {
 	compile project(':batch-core')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	//compile group: 'com.google.guava', name: 'guava', version: '23.0'
 	
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')	
