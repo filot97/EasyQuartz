@@ -1,7 +1,5 @@
 package net.osi.job;
 
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.quartz.DisallowConcurrentExecution;
@@ -51,6 +49,8 @@ public class MyBatisJob implements Job {
 			
 			case Constants.MYBATIS.SQL_TYPE_DELETE:
 				session.delete(sqlId, jobDataMap.getWrappedMap());				
+				break;
+			default:
 				break;
 			}
 			

@@ -10,10 +10,10 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 @UIScope
-@SpringView(name = DashboardView.VIEW_NAME)
-public class DashboardView extends VerticalLayout implements View {	
+@SpringView(name = SchedulerInfoView.VIEW_NAME)
+public class SchedulerInfoView extends VerticalLayout implements View {	
 	
-	public static final String VIEW_NAME = "dashboard";
+	public static final String VIEW_NAME = "scheduler";
 
     @PostConstruct
     void init() {

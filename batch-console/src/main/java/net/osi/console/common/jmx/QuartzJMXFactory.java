@@ -27,7 +27,7 @@ public class QuartzJMXFactory {
 	public MBeanServerConnectionFactoryBean serverConnectionFactory() throws MalformedURLException {
 		MBeanServerConnectionFactoryBean factory = new MBeanServerConnectionFactoryBean();
 		
-		factory.setServiceUrl("service:jmx:rmi://" + rmiHost + "/jndi/rmi://localhost:" + rmiPort + "/jmxrmi");
+		factory.setServiceUrl("service:jmx:rmi://" + rmiHost + "/jndi/rmi://" + rmiHost + ":" + rmiPort + "/jmxrmi");
 		
 		return factory;
 	}

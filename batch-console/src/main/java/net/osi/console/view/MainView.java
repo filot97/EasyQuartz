@@ -1,11 +1,9 @@
 package net.osi.console.view;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.spring.events.EventBus;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
@@ -23,51 +21,39 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import net.osi.console.common.event.JobViewEventListener;
+import lombok.EqualsAndHashCode;
 
 @SuppressWarnings("serial")
 @SpringComponent
 @UIScope
+@EqualsAndHashCode
 public class MainView extends HorizontalLayout {
 	
 	private Navigator navigator;
 
 	@Autowired
-	private SpringViewProvider viewProvider;
-	
-	@Autowired
-    private EventBus.UIEventBus eventBus;
-	
-	@Autowired
-	private JobViewEventListener jobViewEventListener;
-	
-	@Autowired
-	private JobView jobView;
+	private SpringViewProvider viewProvider;	
 	
 	private CssLayout content;
-	private Button dashboardMenu;
+	private Button schedulerInfoMenu;
 	private Button jobDetailMenu;
+	private Button triggerMenu;
 	private Label viewTitle;
 	
 	@PostConstruct
-	protected void init() {		
+	protected void init() {
 		buildMainArea().buildMenuComponent()
 					   .buildContentComponent()
 					   .buildMenuArea()
 					   .buildContentArea()
 					   .buildNavigator(UI.getCurrent(), content)
-					   .addView(DashboardView.VIEW_NAME, new DashboardView())
+					   .addView(SchedulerInfoView.VIEW_NAME, new SchedulerInfoView())
+					   .addClickListener(schedulerInfoMenu, SchedulerInfoView.VIEW_NAME)
 					   .addView(JobView.VIEW_NAME, new JobView())
-					   .navigateTo(DashboardView.VIEW_NAME);
-		
-		eventBus.subscribe(jobViewEventListener);				
-		
-		jobDetailMenu.addClickListener(event -> {
-			navigator.navigateTo(JobView.VIEW_NAME);			
-			//eventBus.publish(jobView, event.getButton().getCaption());
-			
-			viewTitle.setValue(event.getButton().getCaption());
-		});
+					   .addClickListener(jobDetailMenu, JobView.VIEW_NAME)
+					   .addView(TriggerView.VIEW_NAME, new TriggerView())
+					   .addClickListener(triggerMenu, TriggerView.VIEW_NAME)
+					   .navigateTo(SchedulerInfoView.VIEW_NAME);
 	}
 	
 	private MainView buildMainArea() {
@@ -119,25 +105,32 @@ public class MainView extends HorizontalLayout {
 	}
 	
 	private MainView buildMenuComponent() {
-		dashboardMenu = new Button("Dashboard", VaadinIcons.GRID_BIG);
+		schedulerInfoMenu = new Button("Scheduler Info", VaadinIcons.GRID_BIG);
 		
-		dashboardMenu.setStyleName("borderless");
-		dashboardMenu.setPrimaryStyleName("v-button");
-		dashboardMenu.setWidth("100%");
-		dashboardMenu.setHeight("-1px");
+		schedulerInfoMenu.setStyleName("borderless");
+		schedulerInfoMenu.setPrimaryStyleName("v-button");
+		schedulerInfoMenu.setWidth("100%");
+		schedulerInfoMenu.setHeight("-1px");
 		
 		jobDetailMenu = new Button("Job Detail", VaadinIcons.GROUP);
 		
 		jobDetailMenu.setStyleName("borderless");
 		jobDetailMenu.setPrimaryStyleName("v-button");
 		jobDetailMenu.setWidth("100%");
-		jobDetailMenu.setHeight("-1px");	
+		jobDetailMenu.setHeight("-1px");
+		
+		triggerMenu = new Button("Trigger", VaadinIcons.AIRPLANE);
+		
+		triggerMenu.setStyleName("borderless");
+		triggerMenu.setPrimaryStyleName("v-button");
+		triggerMenu.setWidth("100%");
+		triggerMenu.setHeight("-1px");
 		
 		return this;
 	}
 	
 	private MainView buildContentComponent() {
-		viewTitle = new Label("View Title"); 
+		viewTitle = new Label(""); 
 		
 		viewTitle.setStyleName("view-title");
 		viewTitle.setPrimaryStyleName("v-label");
@@ -163,7 +156,7 @@ public class MainView extends HorizontalLayout {
 	}
 	
 	private MainView addView(@NotNull final String viewName, @NotNull final View view) {
-		navigator.addView(viewName, view);
+		navigator.addView(viewName, view);		
 		
 		return this;
 	}
@@ -196,16 +189,22 @@ public class MainView extends HorizontalLayout {
 		menu.setWidth("100%");
 		menu.setHeight("-1px");	
 		
-		menu.addComponent(dashboardMenu);
+		menu.addComponent(schedulerInfoMenu);
 		menu.addComponent(jobDetailMenu);
+		menu.addComponent(triggerMenu);
 		
 		area.addComponent(menu);
 		
 		return area;
 	}
 	
-	@PreDestroy
-	public void destory() {
-		eventBus.unsubscribe(jobViewEventListener);
+	private MainView addClickListener(@NotNull Button button, @NotNull String viewName) {
+		button.addClickListener(event -> {
+			navigator.navigateTo(viewName);
+			
+			viewTitle.setValue(event.getButton().getCaption());
+		});
+		
+		return this;
 	}
 }

@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.osi.common.Constants;
-
 @Service
 @Transactional
 @PersistJobDataAfterExecution
@@ -43,7 +41,7 @@ public class QueryJob implements Job {
 	}
 	
 	private List<String> buildArgs(final Map<String, Object> jobDataAsMap) {
-		final List<String> args = new ArrayList<String>();
+		final List<String> args = new ArrayList<>();
 		
 		if (jobDataAsMap == null)
 			return args;

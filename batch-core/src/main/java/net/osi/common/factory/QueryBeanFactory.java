@@ -74,7 +74,7 @@ public class QueryBeanFactory {
 
 		sqlLoader.setMappingFiles(queryProperties.getMappingFiles());
 
-		Map<String, String> nullchecks = new HashMap<String, String>();
+		Map<String, String> nullchecks = new HashMap<>();
 		nullchecks.put("VARCHAR", "");
 
 		sqlLoader.setNullchecks(nullchecks);

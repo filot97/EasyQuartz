@@ -1,6 +1,5 @@
 package net.osi.common.factory;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -39,7 +38,7 @@ public class QuartzBeanFactory {
 	}
 
 	@Bean
-	public SchedulerFactoryBean schedulerFactory(JobFactory jobFactory) throws Exception {
+	public SchedulerFactoryBean schedulerFactory(JobFactory jobFactory) {
 		SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
 
 		factoryBean.setJobFactory(jobFactory);
@@ -55,8 +54,7 @@ public class QuartzBeanFactory {
 	}
 
 	@Bean
-	public Scheduler scheduler(SchedulerFactoryBean schedulerFactoryBean) throws SchedulerException,
-			ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Scheduler scheduler(SchedulerFactoryBean schedulerFactoryBean) throws SchedulerException {
 		Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
 		scheduler.clear();

@@ -9,12 +9,14 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 
+import lombok.EqualsAndHashCode;
 import net.osi.console.view.MainView;
 
 @SuppressWarnings("serial")
 @SpringUI(path = "/console")
 @Title("Quartz Console")
 @Theme("batch-theme")
+@EqualsAndHashCode
 public class ConsoleUI extends UI {
 	
 	@Autowired

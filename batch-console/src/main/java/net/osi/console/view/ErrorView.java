@@ -13,9 +13,12 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import lombok.EqualsAndHashCode;
+
 @SuppressWarnings("serial")
 @UIScope
 @SpringView(name = ErrorView.VIEW_NAME)
+@EqualsAndHashCode
 public class ErrorView extends VerticalLayout implements View {
 	
 	public static final String VIEW_NAME = "error";

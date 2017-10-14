@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jmx.access.MBeanProxyFactoryBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import net.osi.console.common.jmx.QuartzDataConverter;
+import net.osi.console.common.quartz.DataConverter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,7 +36,7 @@ public class TestQuartzJMX {
 			//String jobClass = (String) job.get("jobClass");			
 			
 			//JobDetailSupport.newJobDetail(job);
-			JobDetail jobDetail = QuartzDataConverter.toJobDetail(job);
+			JobDetail jobDetail = DataConverter.toJobDetail(job);
 			
 			for (String key : jobDetail.getJobDataMap().keySet()) {
 				System.out.println(key + ":" + jobDetail.getJobDataMap().getString(key));

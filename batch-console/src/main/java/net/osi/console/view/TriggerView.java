@@ -33,11 +33,11 @@ import net.osi.console.common.quartz.KeyValue;
 
 @SuppressWarnings("serial")
 @UIScope
-@SpringView(name = JobView.VIEW_NAME)
+@SpringView(name = TriggerView.VIEW_NAME)
 @EqualsAndHashCode
-public class JobView extends VerticalLayout implements View {	
-	
-	public static final String VIEW_NAME = "job";	
+public class TriggerView extends VerticalLayout implements View {
+
+	public static final String VIEW_NAME = "trigger";
 	
 	@Autowired
 	private MBeanProxyFactoryBean quartzProxy;
@@ -74,7 +74,7 @@ public class JobView extends VerticalLayout implements View {
     	
     }
     
-    private JobView buildMainArea() {
+    private TriggerView buildMainArea() {
     	setStyleName("crud-template");
 		setPrimaryStyleName("v-verticallayout");
 		setMargin(false);
@@ -85,7 +85,7 @@ public class JobView extends VerticalLayout implements View {
 		return this;
     }
     
-    private JobView buildTopArea() {
+    private TriggerView buildTopArea() {
     	HorizontalLayout topArea = new HorizontalLayout();
     	
     	topArea.setStyleName("top-bar");
@@ -114,7 +114,7 @@ public class JobView extends VerticalLayout implements View {
     	return this;
     }
     
-    private JobView buildTopComponent() {
+    private TriggerView buildTopComponent() {
     	search = new TextField();
     	
     	search.addStyleName(ValoTheme.TEXTFIELD_SMALL);
@@ -128,7 +128,7 @@ public class JobView extends VerticalLayout implements View {
     	return this;
     }
     
-    private JobView buildTabComponent() {
+    private TriggerView buildTabComponent() {
     	jobTab = new TabSheet();
     	
     	jobTab.setPrimaryStyleName("v-tabsheet");
@@ -154,7 +154,7 @@ public class JobView extends VerticalLayout implements View {
     	return this;
     }
     
-    private JobView buildTabArea() {
+    private TriggerView buildTabArea() {
     	CssLayout mainArea = new CssLayout();
     	
     	mainArea.setStyleName("content");
@@ -184,7 +184,7 @@ public class JobView extends VerticalLayout implements View {
     	return this;
     }
     
-    private JobView addTab(@NotNull final TabSheet sheet,
+    private TriggerView addTab(@NotNull final TabSheet sheet,
     					   @NotNull final Component component,
     					   @NotNull final String caption,
     					   @NotNull final Resource icon) {
@@ -194,7 +194,7 @@ public class JobView extends VerticalLayout implements View {
     	return this;
     }
     
-	private JobView buildJobDetailGrid() throws Exception {
+	private TriggerView buildJobDetailGrid() throws Exception {
 		List<JobDetailEx> jobDetails = DataConverter.toJobDetails(quartz.getAllJobDetails());
 		
 		jobDetailGrid.setItems(jobDetails);
